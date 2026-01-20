@@ -7,31 +7,76 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .gradient-text { background: linear-gradient(90deg, #f87171, #fb923c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
     </style>
 </head>
 <body class="bg-zinc-950 text-zinc-100 font-sans selection:bg-orange-500/30">
 
-    <nav class="p-6 flex justify-between items-center max-w-6xl mx-auto">
+    <nav class="p-6 flex justify-between items-center max-w-6xl mx-auto sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md">
         <div class="text-xl font-black tracking-tighter">REEVES<span class="text-orange-500 text-2xl">.</span>INNOVATE</div>
-        <a href="#contact" class="text-sm font-bold uppercase tracking-widest border border-zinc-700 px-4 py-2 rounded-full hover:bg-zinc-100 hover:text-black transition">The Audit</a>
+        <a href="https://meetings-eu1.hubspot.com/craig-reeves1" class="text-xs font-bold uppercase tracking-widest border border-zinc-700 px-5 py-2 rounded-full hover:bg-white hover:text-black transition duration-300">Book Audit</a>
     </nav>
 
-    <header class="max-w-6xl mx-auto py-24 px-6 grid md:grid-cols-2 gap-12 items-center">
+    <header class="max-w-6xl mx-auto py-24 px-6 grid md:grid-cols-2 gap-16 items-center">
         <div>
-            <h1 class="text-6xl font-black leading-tight mb-6">
-                Delete the <br><span class="gradient-text text-7xl">Boring S***.</span>
+            <div class="inline-block px-3 py-1 rounded-full border border-orange-500/30 text-orange-500 text-xs font-bold uppercase tracking-widest mb-6">2026 AI Maturity Report</div>
+            <h1 class="text-6xl lg:text-7xl font-black leading-tight mb-6">
+                Delete the <br><span class="gradient-text">Boring S***.</span>
             </h1>
-            <p class="text-xl text-zinc-400 mb-8">
+            <p class="text-xl text-zinc-400 mb-10 leading-relaxed">
                 68% of CEOs are increasing AI spend in 2026. Yet 50% are failing at ROI. <br><br>
-                <strong>I fix the ROI Tension in 90 days.</strong>
+                <strong>I bridge the "ROI Tension" in 90 days by focusng on what actually matters.</strong>
             </p>
-            <div class="flex gap-4">
-                <a href="#contact" class="bg-orange-500 text-white px-8 py-4 rounded-lg font-bold hover:bg-orange-600 transition shadow-lg shadow-orange-500/20">Book Your 90-Day Sprint</a>
+            <div class="flex flex-wrap gap-4">
+                <a href="https://meetings-eu1.hubspot.com/craig-reeves1" class="bg-orange-500 text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-orange-600 transition shadow-2xl shadow-orange-500/20">Schedule Your 90-Day Sprint</a>
             </div>
         </div>
+        
         <div class="relative group">
-            <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-rose-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-            <div class="relative bg-zinc-900 aspect-[4/5] rounded-2xl border border-zinc-800 flex items-center justify-center overflow-hidden">
-                <span class="text-zinc-700 font-bold uppercase tracking-widest">Book Cover / Author Photo Placeholder</span>
+            <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-rose-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+            <div class="relative bg-zinc-900 aspect-[4/5] rounded-2xl border border-zinc-800 flex flex-col items-center justify-center p-12 text-center">
+                <div class="w-20 h-1 bg-orange-500 mb-6"></div>
+                <h2 class="text-3xl font-bold mb-4 italic">Delete the Boring S***</h2>
+                <p class="text-zinc-500 uppercase tracking-widest text-sm font-bold">The 90-Day Playbook for AI Maturity</p>
+                </div>
+        </div>
+    </header>
+
+    <section class="py-24 px-6 bg-zinc-900/30">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">The Playbook</h2>
+                <p class="text-zinc-500">How we deliver ROI while your competitors are still in "Pilot Purgatory."</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass p-10 rounded-3xl">
+                    <div class="text-orange-500 text-4xl font-black mb-6">01</div>
+                    <h3 class="text-xl font-bold mb-4 text-white">The Audit</h3>
+                    <p class="text-zinc-400 leading-relaxed">We identify the manual, soul-crushing tasks that are draining your margins and killing your team's creativity.</p>
+                </div>
+                <div class="glass p-10 rounded-3xl">
+                    <div class="text-orange-500 text-4xl font-black mb-6">02</div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Augmentation</h3>
+                    <p class="text-zinc-400 leading-relaxed">We deploy lean AI solutions to meet the 6-month ROI target currently demanded by 53% of investors.</p>
+                </div>
+                <div class="glass p-10 rounded-3xl">
+                    <div class="text-orange-500 text-4xl font-black mb-6">03</div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Maturity</h3>
+                    <p class="text-zinc-400 leading-relaxed">We upskill your talent to ensure the transformation sticks. We turn your AI spend into a long-term asset.</p>
+                </div>
             </div>
         </div>
+    </section>
+
+    <footer class="py-24 text-center">
+        <p class="text-zinc-500 uppercase tracking-widest text-sm font-bold mb-4">Ready to Innovate?</p>
+        <h2 class="text-4xl font-bold mb-10 max-w-2xl mx-auto">Stop wasting time on boring s***. Let's build your AI maturity.</h2>
+        <a href="https://meetings-eu1.hubspot.com/craig-reeves1" class="inline-block border-2 border-white px-12 py-5 rounded-full font-bold text-lg hover:bg-white hover:text-black transition duration-300">Book A Free Strategy Call</a>
+        <div class="mt-20 text-zinc-600 text-xs">
+            © 2026 REEVES INNOVATE. All Rights Reserved. <br>
+            Citing Teneo Survey Data 2026.
+        </div>
+    </footer>
+
+</body>
+</html>
