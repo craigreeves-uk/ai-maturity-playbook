@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <title>Book 15-Min Discovery | Craig Reeves</title>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    <style>
+        body { font-family: sans-serif; background: #0d1117; color: #fff; max-width: 850px; margin: auto; padding: 20px; }
+        #calendar { background: #fff; color: #000; border-radius: 8px; padding: 10px; }
+        .modal { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#161b22; padding:25px; border:2px solid #ff6600; border-radius:10px; z-index:1000; width:90%; max-width:400px; }
+        input, textarea { width:100%; margin-bottom:10px; padding:8px; border-radius:4px; border:1px solid #30363d; background:#0d1117; color:#fff; }
+        button { width:100%; padding:10px; background:#ff6600; color:#fff; border:none; font-weight:bold; cursor:pointer; }
+    </style>
+</head>
+<body>
+    <h1>Book a 15-Minute Strategy Session</h1>
+    <div id='calendar'></div>
+
+    <div id="bookingModal" class="modal">
+        <h3 id="timeLabel"></h3>
+        <form id="callForm">
+            <input type="hidden" name="startTime" id="startTimeInput">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Work Email" required>
+            <input type="text" name="org" placeholder="Organisation" required>
+            <textarea name="problem" placeholder="What friction point are we solving?"></textarea>
+            <button type="submit" id="btn">Confirm Booking</button>
+            <button type="button" onclick="document.getElementById('bookingModal').style.display='none'" style="background:#333; margin-top:5px;">Cancel</button>
+        </form>
+    </div>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+    <script>
+        const url = 'https://script.google.com/macros/s/AKfycbwaciEzokR0DRG41vTGFu5mP7my9EGF2bFV26zKqI1UgGj18sX3IUJOIH9chH8VQqt4/exec';
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+                initialView: 'timeGridWeek',
+                slotDuration: '00:15:00',
+                events: url,
+                dateClick: function(info) {
+                    document.getElementById('bookingModal').style.display='block';
+                    document.getElementById('startTimeInput').value = info.dateStr;
+                    document.getElementById('timeLabel').innerText = new Date(info.dateStr).toLocaleString();
+                }
+            });
+            calendar.render();
+        });
+
+        document.getElementById('callForm').onsubmit = e => {
+            e.preventDefault();
+            document.getElementById('btn').innerText = "Processing...";
+            fetch(url, { method: 'POST', body: new FormData(e.target) })
+            .then(() => { alert("Check your email for the invite!"); location.reload(); });
+        };
+    </script>
+</body>
+</html>
