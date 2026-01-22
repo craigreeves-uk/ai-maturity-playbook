@@ -94,29 +94,43 @@
         calendar.render();
     });
 
-    function showSlots(date) {
-        const list = document.getElementById('slot-list');
-        const heading = document.getElementById('slot-heading');
-        list.innerHTML = '';
-        
-        const formattedDate = new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
-        heading.innerText = "Times for " + formattedDate;
+    async function showSlots(date) {
+    const list = document.getElementById('slot-list');
+    const heading = document.getElementById('slot-heading');
+    list.innerHTML = 'Loading available times...';
+    
+    // Fetch live busy slots from your Google Script
+    const response = await fetch(url);
+    const busySlots = await response.json();
+    
+    list.innerHTML = '';
+    const formattedDate = new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
+    heading.innerText = "Times for " + formattedDate;
 
-        // Generate 15-min slots from 12:00 to 14:00 (Matches your image)
-        const times = ["12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00"];
-        
-        times.forEach(t => {
+    const times = ["12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00"];
+    
+    times.forEach(t => {
+        const slotTime = new Date(date + 'T' + t + ':00Z');
+        // Check if this specific time overlaps with any 'Busy' event
+        const isBusy = busySlots.some(busy => {
+            const bStart = new Date(busy.start);
+            const bEnd = new Date(busy.end);
+            return (slotTime >= bStart && slotTime < bEnd);
+        });
+
+        if (!isBusy) {
             let b = document.createElement('button');
             b.className = 'time-btn';
             b.innerText = t;
-            b.onclick = () => {
-                document.getElementById('bookingModal').style.display = 'block';
-                document.getElementById('startTimeInput').value = date + 'T' + t;
-                document.getElementById('displayTime').innerText = formattedDate + " at " + t;
-            };
+            b.onclick = () => openBookingModal(date, t);
             list.appendChild(b);
-        });
+        }
+    });
+    
+    if(list.innerHTML === '') {
+        list.innerHTML = '<p style="color:red;">No slots available for this day.</p>';
     }
+}
 
     document.getElementById('bookingForm').onsubmit = e => {
         e.preventDefault();
