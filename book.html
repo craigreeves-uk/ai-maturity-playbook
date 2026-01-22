@@ -5,6 +5,17 @@
     <title>Discovery Call: Bridging the "How" Gap</title>
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
     <style>
+        .modal-content {
+    max-height: 90vh; /* Prevents the modal from cutting off on smaller screens */
+    overflow-y: auto;
+    width: 450px; /* Slightly wider to accommodate the privacy text comfortably */
+}
+
+/* Style the checkbox to be more 'Unboring' */
+input[type="checkbox"] {
+    accent-color: var(--highlight);
+    cursor: pointer;
+}
         :root { --brand-blue: #2d3e50; --highlight: #ff6600; --text-gray: #555; }
         body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         
@@ -59,16 +70,29 @@
 
 <div id="bookingModal" class="modal">
     <div class="modal-content">
-        <h2 style="margin-top:0;">Confirm Details</h2>
-        <p id="displayTime" style="color:var(--highlight); font-weight:bold;"></p>
+        <h2 style="margin-top:0; color:var(--brand-blue);">Confirm Details</h2>
+        <p id="displayTime" style="color:var(--highlight); font-weight:bold; margin-bottom: 20px;"></p>
+        
         <form id="bookingForm">
             <input type="hidden" name="startTime" id="startTimeInput">
             <input type="text" name="name" placeholder="Your Full Name" required>
             <input type="email" name="email" placeholder="Work Email" required>
             <input type="text" name="org" placeholder="Organisation / Role" required>
             <textarea name="problem" placeholder="What is the 'Boring Sh*t' we are solving?" rows="3"></textarea>
+
+            <div style="font-size: 0.75rem; color: #555; background: #f9f9f9; padding: 15px; border-radius: 6px; border: 1px solid #eee; margin: 15px 0;">
+                <p style="margin-top: 0;">REEVES INNOVATE is committed to protecting and respecting your privacy. We'll only use your personal information to provide the products and services you requested.</p>
+                
+                <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
+                    <input type="checkbox" name="consent" style="width: auto; margin-top: 3px;" required>
+                    <span>I agree to receive other communications from REEVES INNOVATE.</span>
+                </label>
+
+                <p style="margin-bottom: 0; margin-top: 10px;">You can unsubscribe at any time. By clicking submit, you consent to allow REEVES INNOVATE to store and process the information submitted above.</p>
+            </div>
+
             <button type="submit" class="submit-btn" id="subBtn">Schedule Event</button>
-            <button type="button" onclick="document.getElementById('bookingModal').style.display='none'" style="background:none; border:none; color:gray; width:100%; cursor:pointer; margin-top:10px;">Cancel</button>
+            <button type="button" onclick="document.getElementById('bookingModal').style.display='none'" style="background:none; border:none; color:gray; width:100%; cursor:pointer; margin-top:10px; font-size: 0.8rem;">Cancel</button>
         </form>
     </div>
 </div>
