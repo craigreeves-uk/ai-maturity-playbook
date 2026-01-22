@@ -15,12 +15,11 @@
         .profile-img { width: 70px; height: 70px; border-radius: 50%; border: 2px solid white; margin-bottom: 20px; align-self: center; }
         .left-side h1 { font-size: 1.3rem; margin: 10px 0 30px 0; text-align: center; }
         
-        /* Calendar Styling for Blue Background */
         #calendar { background: transparent; width: 100%; }
         .fc { color: white !important; font-size: 0.9rem; }
         .fc .fc-toolbar-title { font-size: 1.1rem !important; margin-bottom: 10px; }
         .fc .fc-button-primary { background: transparent !important; border: 1px solid rgba(255,255,255,0.3) !important; }
-        .fc-daygrid-day-number { color: white !important; padding: 8px !important; }
+        .fc-daygrid-day-number { color: white !important; padding: 8px !important; text-decoration: none; }
         .fc-day-other .fc-daygrid-day-number { opacity: 0.3; }
         .fc-highlight { background: rgba(255, 102, 0, 0.4) !important; }
 
@@ -54,8 +53,7 @@
             <p><strong>⏳ Duration:</strong> 15 mins</p>
         </div>
         <div class="slot-title" id="slot-heading">Select a day to see available times</div>
-        <div id="slot-list" class="slot-list">
-            </div>
+        <div id="slot-list" class="slot-list"></div>
     </div>
 </div>
 
@@ -77,7 +75,7 @@
 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
 <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxu-OOBksCoXNAwPR0LpUl8j0BIm5GfkSVkedVsRNRRouevE7FJclW0kqip-WYsq92w/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxmI7q1QwojyiMtdQ8GsG88blR0-NYzlfQL-UOEip7qzb21QQ6kXyldnmI0UH2l5CQ/exec';
 
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
@@ -94,49 +92,78 @@
         calendar.render();
     });
 
-    async function showSlots(date) {
-    const list = document.getElementById('slot-list');
-    const heading = document.getElementById('slot-heading');
-    list.innerHTML = 'Loading available times...';
-    
-    // Fetch live busy slots from your Google Script
-    const response = await fetch(url);
-    const busySlots = await response.json();
-    
-    list.innerHTML = '';
-    const formattedDate = new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
-    heading.innerText = "Times for " + formattedDate;
+    // JSONP Handler to bypass CORS
+    function showSlots(date) {
+        const list = document.getElementById('slot-list');
+        const heading = document.getElementById('slot-heading');
+        list.innerHTML = 'Consulting the diary...';
 
-    const times = ["12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00"];
-    
-    times.forEach(t => {
-        const slotTime = new Date(date + 'T' + t + ':00Z');
-        // Check if this specific time overlaps with any 'Busy' event
-        const isBusy = busySlots.some(busy => {
-            const bStart = new Date(busy.start);
-            const bEnd = new Date(busy.end);
-            return (slotTime >= bStart && slotTime < bEnd);
-        });
+        // Temporary callback for this specific request
+        window.handleBusyData = function(busySlots) {
+            list.innerHTML = '';
+            const formattedDate = new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
+            heading.innerText = "Times for " + formattedDate;
 
-        if (!isBusy) {
-            let b = document.createElement('button');
-            b.className = 'time-btn';
-            b.innerText = t;
-            b.onclick = () => openBookingModal(date, t);
-            list.appendChild(b);
-        }
-    });
-    
-    if(list.innerHTML === '') {
-        list.innerHTML = '<p style="color:red;">No slots available for this day.</p>';
+            const times = ["12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00"];
+            
+            times.forEach(t => {
+                // Using local time string for comparison
+                const slotTime = new Date(date + 'T' + t + ':00');
+                
+                const isBusy = busySlots.some(busy => {
+                    const bStart = new Date(busy.start);
+                    const bEnd = new Date(busy.end);
+                    return (slotTime >= bStart && slotTime < bEnd);
+                });
+
+                if (!isBusy) {
+                    let b = document.createElement('button');
+                    b.className = 'time-btn';
+                    b.innerText = t;
+                    b.onclick = () => {
+                        document.getElementById('bookingModal').style.display = 'block';
+                        document.getElementById('startTimeInput').value = date + 'T' + t;
+                        document.getElementById('displayTime').innerText = formattedDate + " at " + t;
+                    };
+                    list.appendChild(b);
+                }
+            });
+
+            if(list.innerHTML === '') {
+                list.innerHTML = '<p style="color:red;">No slots available for this day.</p>';
+            }
+            
+            // Cleanup the temporary script tag
+            document.getElementById('jsonp-script')?.remove();
+        };
+
+        // Create script tag for JSONP fetch
+        const script = document.createElement('script');
+        script.id = 'jsonp-script';
+        script.src = `${SCRIPT_URL}?callback=handleBusyData`;
+        document.body.appendChild(script);
     }
-}
 
     document.getElementById('bookingForm').onsubmit = e => {
         e.preventDefault();
         document.getElementById('subBtn').innerText = "Booking...";
+        
+        // POST requests still use fetch, but don't require the JSONP trick
         fetch(SCRIPT_URL, { method: 'POST', body: new FormData(e.target) })
-        .then(() => { alert("Success! Check your email for the invite."); location.reload(); });
+        .then(response => response.json())
+        .then(data => {
+            if(data.result === 'success') {
+                alert("Success! Check your email for the invite.");
+                location.reload();
+            } else {
+                alert("Error: " + data.error);
+                document.getElementById('subBtn').innerText = "Schedule Event";
+            }
+        })
+        .catch(err => {
+            alert("Booking failed. Please try again.");
+            document.getElementById('subBtn').innerText = "Schedule Event";
+        });
     };
 </script>
 </body>
