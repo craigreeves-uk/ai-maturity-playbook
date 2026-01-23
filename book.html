@@ -174,12 +174,12 @@ input[type="checkbox"] {
         document.getElementById('subBtn').innerText = "Booking...";
         
         // POST requests still use fetch, but don't require the JSONP trick
-        fetch(SCRIPT_URL, { method: 'POST', body: new FormData(e.target) })
+       fetch(SCRIPT_URL, { method: 'POST', body: new FormData(e.target) })
         .then(response => response.json())
         .then(data => {
             if(data.result === 'success') {
-                alert("Success! Check your email for the invite.");
-                location.reload();
+                // Redirect to the success page instead of a simple alert
+                window.location.href = 'success.html';
             } else {
                 alert("Error: " + data.error);
                 document.getElementById('subBtn').innerText = "Schedule Event";
