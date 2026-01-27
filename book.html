@@ -2,32 +2,74 @@
 <html lang="en-GB">
 <head>
     <meta charset="UTF-8">
-    <title>Discovery Call: Bridging the "How" Gap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discovery Call: Bridging the "How" Gap | Reeves Innovate</title>
+    
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    
     <style>
-        .modal-content {
-    max-height: 90vh; /* Prevents the modal from cutting off on smaller screens */
-    overflow-y: auto;
-    width: 450px; /* Slightly wider to accommodate the privacy text comfortably */
-}
+        :root { 
+            --brand-blue: #2d3e50; 
+            --highlight: #ff6600; 
+            --text-gray: #555; 
+            --bg-light: #f0f2f5;
+        }
 
-/* Style the checkbox to be more 'Unboring' */
-input[type="checkbox"] {
-    accent-color: var(--highlight);
-    cursor: pointer;
-}
-        :root { --brand-blue: #2d3e50; --highlight: #ff6600; --text-gray: #555; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        
-        .main-container { display: flex; width: 950px; background: white; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; min-height: 600px; }
+        * { box-sizing: border-box; }
 
-        /* Left Side: Blue Branding & Calendar */
-        .left-side { width: 55%; background: var(--brand-blue); color: white; padding: 40px; display: flex; flex-direction: column; }
-        .profile-img { width: 70px; height: 70px; border-radius: 50%; border: 2px solid white; margin-bottom: 20px; align-self: center; }
-        .left-side h1 { font-size: 1.3rem; margin: 10px 0 30px 0; text-align: center; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--bg-light); 
+            margin: 0; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+
+        /* Responsive Main Container */
+        .main-container { 
+            display: flex; 
+            flex-direction: row;
+            width: 100%;
+            max-width: 950px; 
+            background: white; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            overflow: hidden; 
+            min-height: 600px; 
+        }
+
+        /* Left Side: Branding & Calendar */
+        .left-side { 
+            width: 55%; 
+            background: var(--brand-blue); 
+            color: white; 
+            padding: 40px; 
+            display: flex; 
+            flex-direction: column; 
+        }
+
+        .profile-img { 
+            width: 70px; 
+            height: 70px; 
+            border-radius: 50%; 
+            border: 2px solid white; 
+            margin-bottom: 20px; 
+            align-self: center; 
+            object-fit: cover;
+        }
+
+        .left-side h1 { 
+            font-size: 1.3rem; 
+            margin: 10px 0 30px 0; 
+            text-align: center; 
+            line-height: 1.4;
+        }
         
         #calendar { background: transparent; width: 100%; }
-        .fc { color: white !important; font-size: 0.9rem; }
+        .fc { color: white !important; font-size: 0.85rem; }
         .fc .fc-toolbar-title { font-size: 1.1rem !important; margin-bottom: 10px; }
         .fc .fc-button-primary { background: transparent !important; border: 1px solid rgba(255,255,255,0.3) !important; }
         .fc-daygrid-day-number { color: white !important; padding: 8px !important; text-decoration: none; }
@@ -35,25 +77,107 @@ input[type="checkbox"] {
         .fc-highlight { background: rgba(255, 102, 0, 0.4) !important; }
 
         /* Right Side: Slots Display */
-        .right-side { width: 45%; padding: 40px; background: white; border-left: 1px solid #eee; display: flex; flex-direction: column; }
+        .right-side { 
+            width: 45%; 
+            padding: 40px; 
+            background: white; 
+            border-left: 1px solid #eee; 
+            display: flex; 
+            flex-direction: column; 
+        }
+
         .meeting-meta { font-size: 0.9rem; color: var(--text-gray); margin-bottom: 20px; }
         .slot-title { font-weight: bold; margin-bottom: 20px; font-size: 1rem; color: #333; }
-        .slot-list { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
-        .time-btn { padding: 12px; border: 1px solid #007bff; background: white; color: #007bff; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.2s; text-align: center; }
-        .time-btn:hover { background: #eef6ff; }
+        
+        .slot-list { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+            max-height: 400px;
+            overflow-y: auto; 
+            padding-right: 5px;
+        }
 
-        /* Modal Overlay */
-        .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000; }
-        .modal-content { position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:30px; border-radius:12px; width:400px; color:#333; }
-        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; }
-        .submit-btn { background: var(--highlight); color: white; border: none; padding: 15px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .time-btn { 
+            padding: 12px; 
+            border: 1px solid #007bff; 
+            background: white; 
+            color: #007bff; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: 0.2s; 
+            text-align: center; 
+        }
+        .time-btn:hover { background: #eef6ff; transform: scale(1.02); }
+
+        /* Modal / Booking Form */
+        .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:1000; }
+        
+        .modal-content { 
+            position:absolute; 
+            top:50%; 
+            left:50%; 
+            transform:translate(-50%, -50%); 
+            background:white; 
+            padding:30px; 
+            border-radius:12px; 
+            width: 95%;
+            max-width: 450px; 
+            max-height: 90vh;
+            overflow-y: auto;
+            color:#333; 
+        }
+
+        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; }
+        input[type="checkbox"] { width: auto; accent-color: var(--highlight); }
+        
+        .submit-btn { 
+            background: var(--highlight); 
+            color: white; 
+            border: none; 
+            padding: 15px; 
+            width: 100%; 
+            font-weight: bold; 
+            border-radius: 6px;
+            cursor: pointer; 
+            margin-top: 10px; 
+            font-size: 1rem;
+        }
+
+        /* MOBILE RESPONSIVE QUERIES */
+        @media (max-width: 800px) {
+            body { padding: 10px; align-items: flex-start; }
+            
+            .main-container { 
+                flex-direction: column; 
+                min-height: auto;
+                margin-top: 10px;
+            }
+
+            .left-side, .right-side { 
+                width: 100%; 
+                padding: 25px; 
+            }
+
+            .right-side { 
+                border-left: none; 
+                border-top: 1px solid #eee; 
+            }
+
+            .left-side h1 { font-size: 1.1rem; }
+            
+            .modal-content {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
 
 <div class="main-container">
     <div class="left-side">
-        <img src="me.jpg" class="profile-img">
+        <img src="me.jpg" class="profile-img" alt="Craig Reeves">
         <h1>Discovery Call: Bridging the "How" Gap</h1>
         <div id='calendar'></div>
     </div>
@@ -70,7 +194,7 @@ input[type="checkbox"] {
 
 <div id="bookingModal" class="modal">
     <div class="modal-content">
-        <h2 style="margin-top:0; color:var(--brand-blue);">Confirm Details</h2>
+        <h2 style="margin-top:0; color:var(--brand-blue); font-size: 1.4rem;">Confirm Details</h2>
         <p id="displayTime" style="color:var(--highlight); font-weight:bold; margin-bottom: 20px;"></p>
         
         <form id="bookingForm">
@@ -80,116 +204,21 @@ input[type="checkbox"] {
             <input type="text" name="org" placeholder="Organisation / Role" required>
             <textarea name="problem" placeholder="What is the 'Boring Sh*t' we are solving?" rows="3"></textarea>
 
-            <div style="font-size: 0.75rem; color: #555; background: #f9f9f9; padding: 15px; border-radius: 6px; border: 1px solid #eee; margin: 15px 0;">
-                <p style="margin-top: 0;">REEVES INNOVATE is committed to protecting and respecting your privacy. We'll only use your personal information to provide the products and services you requested.</p>
+            <div style="font-size: 0.8rem; color: #555; background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee; margin: 15px 0;">
+                <p style="margin-top: 0;"><strong>REEVES INNOVATE</strong> is committed to respecting your privacy. We use this info to manage your request.</p>
                 
                 <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
-                    <input type="checkbox" name="consent" style="width: auto; margin-top: 3px;" required>
-                    <span>I agree to receive other communications from REEVES INNOVATE.</span>
+                    <input type="checkbox" name="consent" required>
+                    <span>I agree to receive communications regarding this service.</span>
                 </label>
 
-                <p style="margin-bottom: 0; margin-top: 10px;">You can unsubscribe at any time. By clicking submit, you consent to allow REEVES INNOVATE to store and process the information submitted above.</p>
+                <p style="margin-bottom: 0; margin-top: 10px; font-size: 0.7rem;">You can unsubscribe at any time. By clicking submit, you consent to data processing.</p>
             </div>
 
             <button type="submit" class="submit-btn" id="subBtn">Schedule Event</button>
-            <button type="button" onclick="document.getElementById('bookingModal').style.display='none'" style="background:none; border:none; color:gray; width:100%; cursor:pointer; margin-top:10px; font-size: 0.8rem;">Cancel</button>
+            <button type="button" onclick="document.getElementById('bookingModal').style.display='none'" style="background:none; border:none; color:gray; width:100%; cursor:pointer; margin-top:12px; font-size: 0.85rem; text-decoration: underline;">Cancel</button>
         </form>
     </div>
 </div>
 
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
-<script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweBjZK1rJoEJonjnGejenSifhXTCOVGgVuAzcJMKBAmuhCc0ct1LyqWLDB_PlVV4TG/exec';
-    
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            initialDate: '2026-02-05', 
-            validRange: { start: '2026-02-05' },
-            headerToolbar: { left: 'prev', center: 'title', right: 'next' },
-            selectable: true,
-            dateClick: function(info) {
-                showSlots(info.dateStr);
-            }
-        });
-        calendar.render();
-    });
-
-    // JSONP Handler to bypass CORS
-    function showSlots(date) {
-        const list = document.getElementById('slot-list');
-        const heading = document.getElementById('slot-heading');
-        list.innerHTML = 'Consulting the diary...';
-
-        // Temporary callback for this specific request
-        window.handleBusyData = function(busySlots) {
-            list.innerHTML = '';
-            const formattedDate = new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
-            heading.innerText = "Times for " + formattedDate;
-
-            const times = ["12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00"];
-            
-            times.forEach(t => {
-                // Using local time string for comparison
-                const slotTime = new Date(date + 'T' + t + ':00');
-                
-                const isBusy = busySlots.some(busy => {
-                    const bStart = new Date(busy.start);
-                    const bEnd = new Date(busy.end);
-                    return (slotTime >= bStart && slotTime < bEnd);
-                });
-
-                if (!isBusy) {
-                    let b = document.createElement('button');
-                    b.className = 'time-btn';
-                    b.innerText = t;
-                    b.onclick = () => {
-                        document.getElementById('bookingModal').style.display = 'block';
-                        document.getElementById('startTimeInput').value = date + 'T' + t;
-                        document.getElementById('displayTime').innerText = formattedDate + " at " + t;
-                    };
-                    list.appendChild(b);
-                }
-            });
-
-            if(list.innerHTML === '') {
-                list.innerHTML = '<p style="color:red;">No slots available for this day.</p>';
-            }
-            
-            // Cleanup the temporary script tag
-            document.getElementById('jsonp-script')?.remove();
-        };
-
-        // Create script tag for JSONP fetch
-        const script = document.createElement('script');
-        script.id = 'jsonp-script';
-        script.src = `${SCRIPT_URL}?callback=handleBusyData`;
-        document.body.appendChild(script);
-    }
-
-    document.getElementById('bookingForm').onsubmit = e => {
-        e.preventDefault();
-        document.getElementById('subBtn').innerText = "Booking...";
-        
-        // POST requests still use fetch, but don't require the JSONP trick
-       fetch(SCRIPT_URL, { method: 'POST', body: new FormData(e.target) })
-        .then(response => response.json())
-        .then(data => {
-            if(data.result === 'success') {
-                // Redirect to the success page instead of a simple alert
-                window.location.href = 'success.html';
-            } else {
-                alert("Error: " + data.error);
-                document.getElementById('subBtn').innerText = "Schedule Event";
-            }
-        })
-        .catch(err => {
-            alert("Booking failed. Please try again.");
-            document.getElementById('subBtn').innerText = "Schedule Event";
-        });
-    };
-</script>
-</body>
-</html>
+<script src='
