@@ -14,10 +14,11 @@
         .audit-item { display: flex; align-items: center; margin-bottom: 15px; padding: 10px; cursor: pointer; border-radius: 6px; }
         .audit-item:hover { background-color: var(--grey); }
         input[type="checkbox"] { margin-right: 15px; transform: scale(1.4); accent-color: var(--orange); }
+        input[type="email"] { width: 100%; padding: 15px; border: 2px solid var(--navy); border-radius: 6px; font-size: 1rem; box-sizing: border-box; }
         #result-box { display: none; margin-top: 30px; padding: 25px; border-radius: 8px; text-align: center; }
         .score-high { background: #fee2e2; border: 2px solid #ef4444; color: #991b1b; }
         .score-low { background: #fef3c7; border: 2px solid var(--orange); color: #92400e; }
-        .cta-button { display: block; width: 100%; background: var(--orange); color: var(--white); text-align: center; padding: 18px; font-size: 1.1rem; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; text-transform: uppercase; }
+        .cta-button { display: block; width: 100%; background: var(--orange); color: var(--white); text-align: center; padding: 18px; font-size: 1.1rem; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; text-transform: uppercase; margin-top: 20px; }
         .roadmap { background: var(--navy); color: var(--white); padding: 25px; border-radius: 8px; margin-top: 40px; }
         .roadmap h2 { color: var(--orange); margin-top: 0; }
     </style>
@@ -32,23 +33,28 @@
     <form id="auditForm">
         <div class="category">
             <h2>1. THE COMMUNICATION DRAIN</h2>
-            <label class="audit-item"><input type="checkbox" name="q1"> Do you answer the same 10 questions daily? [cite: 7]</label>
-            <label class="audit-item"><input type="checkbox" name="q2"> Do you lose leads due to slow replies? [cite: 8]</label>
-            <label class="audit-item"><input type="checkbox" name="q3"> Spend 1+ hour daily "checking" messages? [cite: 9]</label>
+            <label class="audit-item"><input type="checkbox" class="audit-check" name="q1"> Do you answer the same 10 questions daily?</label>
+            <label class="audit-item"><input type="checkbox" class="audit-check" name="q2"> Do you lose leads due to slow replies?</label>
+            <label class="audit-item"><input type="checkbox" class="audit-check" name="q3"> Spend 1+ hour daily "checking" messages?</label>
         </div>
 
         <div class="category">
             <h2>2. THE ADMIN TRAP</h2>
-            <label class="audit-item"><input type="checkbox" name="q4"> Manual data entry between systems? [cite: 11]</label>
-            <label class="audit-item"><input type="checkbox" name="q5"> Sundays spent on rotas or invoices? [cite: 12]</label>
-            <label class="audit-item"><input type="checkbox" name="q6"> Filing system is a stack of papers? [cite: 13]</label>
+            <label class="audit-item"><input type="checkbox" class="audit-check" name="q4"> Manual data entry between systems?</label>
+            <label class="audit-item"><input type="checkbox" class="audit-check" name="q5"> Sundays spent on rotas or invoices?</label>
+            <label class="audit-item"><input type="checkbox" class="audit-check" name="q6"> Filing system is a stack of papers?</label>
         </div>
 
         <div class="category">
             <h2>3. THE MISSED OPPORTUNITY</h2>
-            <label class="audit-item"><input type="checkbox" name="q7"> Have a list of customers you never contact? [cite: 15]</label>
-            <label class="audit-item"><input type="checkbox" name="q8"> Lack a clear "90-day plan" for tech? [cite: 16]</label>
-            <label class="audit-item"><input type="checkbox" name="q9"> "Too busy" to save yourself time? [cite: 17]</label>
+            <label class="audit-item"><input type="checkbox" class="audit-check" name="q7"> Have a list of customers you never contact?</label>
+            <label class="audit-item"><input type="checkbox" class="audit-check" name="q8"> Lack a clear "90-day plan" for tech?</label>
+            <label class="audit-item"><input type="checkbox" class="audit-check" name="q9"> "Too busy" to save yourself time?</label>
+        </div>
+
+        <div class="category" style="border-bottom: none;">
+            <h2>WHERE SHOULD I SEND YOUR REPORT?</h2>
+            <input type="email" id="userEmail" placeholder="Enter your business email" required>
         </div>
 
         <button type="button" id="submitBtn" class="cta-button">CALCULATE MY SCORE & SUBMIT</button>
@@ -59,45 +65,30 @@
         </div>
 
         <div class="roadmap">
-            <h2>The 90-Day Roadmap [cite: 22]</h2>
-            <p><strong>Days 1-30: Delete.</strong> [cite: 23]</p>
-            <p><strong>Days 31-60: Automate.</strong> [cite: 24]</p>
-            <p><strong>Days 61-90: Scale.</strong> [cite: 24]</p>
+            <h2>The 90-Day Roadmap</h2>
+            <p><strong>Days 1-30: Delete.</strong> We find friction and remove it.</p>
+            <p><strong>Days 31-60: Automate.</strong> We put the "Boring Sh*t" on autopilot.</p>
+            <p><strong>Days 61-90: Scale.</strong> We use your time to drive revenue.</p>
         </div>
     </form>
 </div>
 
 <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwDXMB5HalHlLTsz1kRz1jtUBq6McVDF0-_928chP20Sdu6fOtA4F1xVyFe2m0OSmeZaQ/exec';
+    
     document.getElementById('submitBtn').addEventListener('click', function() {
-        const checks = document.querySelectorAll('input[type="checkbox"]:checked').length;
+        const email = document.getElementById('userEmail').value;
+        if (!email || !email.includes('@')) {
+            alert("Please enter a valid business email to see your results.");
+            return;
+        }
+
+        const checks = document.querySelectorAll('.audit-check:checked').length;
         const resultBox = document.getElementById('result-box');
         
-        // Show Score 
+        // 1. Show Result UI
         resultBox.style.display = 'block';
         if (checks >= 4) {
             resultBox.className = 'score-high';
             document.getElementById('result-title').innerText = "🚨 STATUS: DROWNING IN BORING SH*T";
-            document.getElementById('result-text').innerText = "Score: " + checks + "/9. Your business is holding you hostage.";
-        } else {
-            resultBox.className = 'score-low';
-            document.getElementById('result-title').innerText = "⚠️ STATUS: LEAKING PROFIT";
-            document.getElementById('result-text').innerText = "Score: " + checks + "/9. You're doing okay, but systems need tightening.";
-        }
-
-        // Background Submit
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzMGQ-9mUY9VAU_DwDVHRalv7acmwAqklhR0pdeRHbtPauy87U9vEPRKj7phhLu9SJLvw/exec';
-        const formData = new FormData();
-        document.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
-            formData.append('q' + (i+1), cb.checked ? "Yes" : "No");
-        });
-
-        fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
-        .then(() => console.log('Success! Check your Google Sheet.'))
-        .catch(error => console.error('Error!', error.message));
-
-        resultBox.scrollIntoView({ behavior: 'smooth' });
-    });
-</script>
-
-</body>
-</html>
+            document.getElementById('result-text').innerText = "Score
