@@ -9,19 +9,17 @@
         body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: var(--navy); margin: 0; background-color: var(--grey); }
         
         /* Branded Header Styling */
-        .header-container {
-            background-color: var(--navy);
-            background-image: url('https://gemini-user-uploads.s3.amazonaws.com/1fc77c.jpg'); /* Or your local path */
-            background-size: cover;
-            background-position: center;
-            height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
-        }
-
+    .header-container {
+    background-color: var(--navy); /* Fallback if image fails */
+    background-image: url('image_1fc77c.jpg'); /* Rename your saved image to this */
+    background-size: cover;
+    background-position: center;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 4px solid var(--orange);
+}
         .container { max-width: 700px; margin: -50px auto 50px; background: var(--white); padding: 40px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); position: relative; }
         .instruction-box { background: var(--orange); color: white; padding: 15px; border-radius: 6px; text-align: center; font-weight: bold; margin-bottom: 30px; text-transform: uppercase; }
         
