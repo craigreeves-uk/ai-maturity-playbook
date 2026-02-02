@@ -5,167 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The 5-Minute Boring Sh*t Audit | Craig Reeves</title>
     <style>
-        :root {
-            --navy: #1a1f2c;
-            --orange: #f29131;
-            --black: #000000;
-            --white: #ffffff;
-            --grey: #f4f4f4;
-        }
-
-        body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--navy);
-            margin: 0;
-            padding: 0;
-            background-color: var(--grey);
-        }
-
-        .header {
-            background: linear-gradient(135deg, var(--navy) 60%, var(--orange));
-            color: var(--white);
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 2.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .container {
-            max-width: 700px;
-            margin: -30px auto 50px;
-            background: var(--white);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-
-        .intro {
-            text-align: center;
-            font-weight: 600;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-            color: var(--navy);
-        }
-
-        .category {
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--grey);
-            padding-bottom: 20px;
-        }
-
-        .category h2 {
-            color: var(--orange);
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .audit-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 6px;
-            transition: background 0.2s;
-            cursor: pointer;
-        }
-
-        .audit-item:hover {
-            background-color: var(--grey);
-        }
-
-        input[type="checkbox"] {
-            margin-right: 15px;
-            transform: scale(1.4);
-            accent-color: var(--orange);
-        }
-
-        #result-box {
-            display: none;
-            margin-top: 30px;
-            padding: 25px;
-            border-radius: 8px;
-            text-align: center;
-            animation: fadeIn 0.5s ease-in;
-        }
-
+        :root { --navy: #1a1f2c; --orange: #f29131; --black: #000000; --white: #ffffff; --grey: #f4f4f4; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: var(--navy); margin: 0; background-color: var(--grey); }
+        .header { background: linear-gradient(135deg, var(--navy) 60%, var(--orange)); color: var(--white); padding: 40px 20px; text-align: center; }
+        .container { max-width: 700px; margin: -30px auto 50px; background: var(--white); padding: 40px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+        .category { margin-bottom: 30px; border-bottom: 2px solid var(--grey); padding-bottom: 20px; }
+        .category h2 { color: var(--orange); font-size: 1.2rem; text-transform: uppercase; }
+        .audit-item { display: flex; align-items: center; margin-bottom: 15px; padding: 10px; cursor: pointer; border-radius: 6px; }
+        .audit-item:hover { background-color: var(--grey); }
+        input[type="checkbox"] { margin-right: 15px; transform: scale(1.4); accent-color: var(--orange); }
+        #result-box { display: none; margin-top: 30px; padding: 25px; border-radius: 8px; text-align: center; }
         .score-high { background: #fee2e2; border: 2px solid #ef4444; color: #991b1b; }
         .score-low { background: #fef3c7; border: 2px solid var(--orange); color: #92400e; }
-
-        .roadmap {
-            background: var(--navy);
-            color: var(--white);
-            padding: 25px;
-            border-radius: 8px;
-            margin-top: 40px;
-        }
-
-        .roadmap h2 { color: var(--orange); margin-top: 0; font-size: 1.3rem; }
-        .roadmap p { font-size: 0.95rem; margin-bottom: 10px; }
-
-        .cta-button {
-            display: block;
-            width: 100%;
-            background: var(--orange);
-            color: var(--white);
-            text-align: center;
-            padding: 18px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-            border: none;
-            border-radius: 6px;
-            margin-top: 25px;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        .cta-button:hover { background: #d67d26; }
-
-        .footer { text-align: center; font-size: 0.85rem; color: #666; padding-bottom: 40px; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .cta-button { display: block; width: 100%; background: var(--orange); color: var(--white); text-align: center; padding: 18px; font-size: 1.1rem; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; text-transform: uppercase; }
+        .roadmap { background: var(--navy); color: var(--white); padding: 25px; border-radius: 8px; margin-top: 40px; }
+        .roadmap h2 { color: var(--orange); margin-top: 0; }
     </style>
 </head>
 <body>
 
 <div class="header">
     <h1>THE 5-MINUTE "BORING SH*T" AUDIT</h1>
-    <p>For Small & Medium Business Owners</p>
 </div>
 
 <div class="container">
-    <p class="intro">Most owners are too busy working in their business to grow their business. Let's see if you are a candidate for AI Maturity.</p>
-
     <form id="auditForm">
         <div class="category">
             <h2>1. THE COMMUNICATION DRAIN</h2>
-            <label class="audit-item"><input type="checkbox" class="audit-check" name="q1"> Do you answer the same 10 questions daily?</label>
-            <label class="audit-item"><input type="checkbox" class="audit-check" name="q2"> Do you lose leads due to slow replies?</label>
-            <label class="audit-item"><input type="checkbox" class="audit-check" name="q3"> Spend 1+ hour daily "checking" messages?</label>
+            <label class="audit-item"><input type="checkbox" name="q1"> Do you answer the same 10 questions daily? [cite: 7]</label>
+            <label class="audit-item"><input type="checkbox" name="q2"> Do you lose leads due to slow replies? [cite: 8]</label>
+            <label class="audit-item"><input type="checkbox" name="q3"> Spend 1+ hour daily "checking" messages? [cite: 9]</label>
         </div>
 
         <div class="category">
             <h2>2. THE ADMIN TRAP</h2>
-            <label class="audit-item"><input type="checkbox" class="audit-check" name="q4"> Manual data entry between systems?</label>
-            <label class="audit-item"><input type="checkbox" class="audit-check" name="q5"> Sundays spent on rotas or invoices?</label>
-            <label class="audit-item"><input type="checkbox" class="audit-check" name="q6"> Filing system is a stack of papers?</label>
+            <label class="audit-item"><input type="checkbox" name="q4"> Manual data entry between systems? [cite: 11]</label>
+            <label class="audit-item"><input type="checkbox" name="q5"> Sundays spent on rotas or invoices? [cite: 12]</label>
+            <label class="audit-item"><input type="checkbox" name="q6"> Filing system is a stack of papers? [cite: 13]</label>
         </div>
 
         <div class="category">
             <h2>3. THE MISSED OPPORTUNITY</h2>
-            <label class="audit-item"><input type="checkbox" class="audit-check" name="q7"> Have a list of customers you never contact?</label>
-            <label class="audit-item"><input type="checkbox" class="audit-check" name="q8"> Lack a clear "90-day plan" for tech?</label>
-            <label class="audit-item"><input type="checkbox" class="audit-check" name="q9"> "Too busy" to save yourself time?</label>
+            <label class="audit-item"><input type="checkbox" name="q7"> Have a list of customers you never contact? [cite: 15]</label>
+            <label class="audit-item"><input type="checkbox" name="q8"> Lack a clear "90-day plan" for tech? [cite: 16]</label>
+            <label class="audit-item"><input type="checkbox" name="q9"> "Too busy" to save yourself time? [cite: 17]</label>
         </div>
 
-        <button type="button" class="cta-button" onclick="calculateAndSubmit()">CALCULATE MY SCORE & SUBMIT</button>
+        <button type="button" id="submitBtn" class="cta-button">CALCULATE MY SCORE & SUBMIT</button>
 
         <div id="result-box">
             <h3 id="result-title"></h3>
@@ -173,24 +59,45 @@
         </div>
 
         <div class="roadmap">
-            <h2>The 90-Day Roadmap</h2>
-            <p><strong>Days 1-30: Delete.</strong> We find the friction and remove it.</p>
-            <p><strong>Days 31-60: Automate.</strong> We put the "Boring Sh*t" on autopilot.</p>
-            <p><strong>Days 61-90: Scale.</strong> We use your time to drive revenue.</p>
+            <h2>The 90-Day Roadmap [cite: 22]</h2>
+            <p><strong>Days 1-30: Delete.</strong> [cite: 23]</p>
+            <p><strong>Days 31-60: Automate.</strong> [cite: 24]</p>
+            <p><strong>Days 61-90: Scale.</strong> [cite: 24]</p>
         </div>
     </form>
 </div>
 
-<div class="footer">
-    <p>Craig Reeves | Author of "Delete the Boring Sh*t"</p>
-    <p>A Modern Journey into AI Maturity</p>
-</div>
-
 <script>
-    function calculateAndSubmit() {
-        const checks = document.querySelectorAll('.audit-check:checked').length;
+    document.getElementById('submitBtn').addEventListener('click', function() {
+        const checks = document.querySelectorAll('input[type="checkbox"]:checked').length;
         const resultBox = document.getElementById('result-box');
-        const resultTitle = document.getElementById('result-title');
-        const resultText = document.getElementById('result-text');
+        
+        // Show Score 
+        resultBox.style.display = 'block';
+        if (checks >= 4) {
+            resultBox.className = 'score-high';
+            document.getElementById('result-title').innerText = "🚨 STATUS: DROWNING IN BORING SH*T";
+            document.getElementById('result-text').innerText = "Score: " + checks + "/9. Your business is holding you hostage.";
+        } else {
+            resultBox.className = 'score-low';
+            document.getElementById('result-title').innerText = "⚠️ STATUS: LEAKING PROFIT";
+            document.getElementById('result-text').innerText = "Score: " + checks + "/9. You're doing okay, but systems need tightening.";
+        }
 
-        // 1. Show the result to the user immediately
+        // Background Submit
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzMGQ-9mUY9VAU_DwDVHRalv7acmwAqklhR0pdeRHbtPauy87U9vEPRKj7phhLu9SJLvw/exec';
+        const formData = new FormData();
+        document.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
+            formData.append('q' + (i+1), cb.checked ? "Yes" : "No");
+        });
+
+        fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
+        .then(() => console.log('Success! Check your Google Sheet.'))
+        .catch(error => console.error('Error!', error.message));
+
+        resultBox.scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
+
+</body>
+</html>
