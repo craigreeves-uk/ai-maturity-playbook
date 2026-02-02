@@ -86,9 +86,30 @@
         const checks = document.querySelectorAll('.audit-check:checked').length;
         const resultBox = document.getElementById('result-box');
         
-        // 1. Show Result UI
+        // 1. Show Result UI [cite: 18-19]
         resultBox.style.display = 'block';
         if (checks >= 4) {
             resultBox.className = 'score-high';
             document.getElementById('result-title').innerText = "🚨 STATUS: DROWNING IN BORING SH*T";
-            document.getElementById('result-text').innerText = "Score
+            document.getElementById('result-text').innerText = "Score: " + checks + "/9. Your business is holding you hostage.";
+        } else {
+            resultBox.className = 'score-low';
+            document.getElementById('result-title').innerText = "⚠️ STATUS: LEAKING PROFIT";
+            document.getElementById('result-text').innerText = "Score: " + checks + "/9. You're doing okay, but systems need tightening.";
+        }
+
+        // 2. Submit Data to Google
+        const params = new URLSearchParams();
+        params.append('email', email);
+        document.querySelectorAll('.audit-check').forEach((cb, i) => {
+            params.append('q' + (i + 1), cb.checked ? "Yes" : "No");
+        });
+
+        fetch(scriptURL, { method: 'POST', body: params, mode: 'no-cors' });
+
+        resultBox.scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
+
+</body>
+</html>
