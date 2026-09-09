@@ -3,82 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reeves Innovate | ADHD Coaching for High Performers</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>ADHD Coaching Discovery Call | Reeves Innovate</title>
+    
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    
     <style>
-        .gradient-text { background: linear-gradient(90deg, #f87171, #fb923c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        :root { 
+            --brand-blue: #2d3e50; 
+            --highlight: #ff6600; 
+            --text-gray: #555; 
+        }
+
+        * { box-sizing: border-box; }
+
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #f0f2f5; 
+            margin: 0; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+
+        .main-container { 
+            display: flex; 
+            width: 100%;
+            max-width: 950px; 
+            background: white; 
+            border-radius: 8px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            overflow: hidden; 
+            min-height: 600px; 
+        }
+
+        /* Left Side: Branding & Calendar */
+        .left-side { 
+            width: 55%; 
+            background: var(--brand-blue); 
+            color: white; 
+            padding: 40px; 
+            display: flex; 
+            flex-direction: column; 
+        }
+
+        .profile-img { 
+            width: 70px; 
+            height: 70px; 
+            border-radius: 50%; 
+            border: 2px solid white; 
+            margin-bottom: 20px; 
+            align-self: center; 
+            object-fit: cover;
+        }
+
+        .left-side h1 { font-size: 1.3rem; margin: 10px 0 30px 0; text-align: center; }
+        
+        #calendar { 
+            width: 100%; 
+            min-height: 400px; 
+            background: transparent;
+        }
+
+        .fc { color: white !important; font-size: 0.9rem; }
+        .fc .fc-toolbar-title { font-size: 1.1rem !important; margin-bottom: 10px; }
+        .fc .fc-button-primary { background: transparent !important; border: 1px solid rgba(255,255,255,0.3) !important; }
+        .fc-daygrid-day-number { color: white !important; padding: 8px !important; text-decoration: none; }
+        .fc-highlight { background: rgba(255, 102, 0, 0.4) !important; }
+
+        /* Right Side: Slots Display */
+        .right-side { 
+            width: 45%; 
+            padding: 40px; 
+            background: white; 
+            border-left: 1px solid #eee; 
+            display: flex; 
+            flex-direction: column; 
+        }
+
+        .slot-list { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+        .time-btn { padding: 12px; border: 1px solid #007bff; background: white; color: #007bff; border-radius: 4px; cursor: pointer; font-weight: bold; text-align: center; }
+        
+        /* Modal Overlay */
+        .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000; }
+        .modal-content { 
+            position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); 
+            background:white; padding:30px; border-radius:12px; 
+            width: 90%; max-width: 450px; max-height: 90vh; overflow-y: auto; 
+        }
+
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; }
+        .submit-btn { background: var(--highlight); color: white; border: none; padding: 15px; width: 100%; font-weight: bold; cursor: pointer; }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 800px) {
+            body { padding: 10px; align-items: flex-start; }
+            .main-container { flex-direction: column; min-height: auto; }
+            .left-side, .right-side { width: 100%; padding: 25px; }
+            .right-side { border-left: none; border-top: 1px solid #eee; }
+            #calendar { min-height: 350px; }
+        }
     </style>
 </head>
-<body class="bg-zinc-950 text-zinc-100 font-sans selection:bg-orange-500/30">
+<body>
 
-    <nav class="p-6 flex justify-between items-center max-w-6xl mx-auto sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md">
-        <div class="text-xl font-black tracking-tighter">REEVES<span class="text-orange-500 text-2xl">.</span>INNOVATE</div>
-        <a href="https://reevesinnovate.com/book.html" class="text-xs font-bold uppercase tracking-widest border border-zinc-700 px-5 py-2 rounded-full hover:bg-white hover:text-black transition duration-300">Book Discovery Call</a>
-    </nav>
-
-    <header class="max-w-6xl mx-auto py-24 px-6 grid md:grid-cols-2 gap-16 items-center">
-        <div>
-            <div class="inline-block px-3 py-1 rounded-full border border-orange-500/30 text-orange-500 text-xs font-bold uppercase tracking-widest mb-6">ADHD & Executive Performance Coaching</div>
-            <h1 class="text-5xl lg:text-6xl font-black leading-tight mb-6">
-                Master Your Mind. <br><span class="gradient-text">Unlock High Performance.</span>
-            </h1>
-            <p class="text-xl text-zinc-400 mb-10 leading-relaxed">
-                Your brain isn't broken—standard advice just wasn't built for your neurotype. <br><br>
-                <strong>We eliminate overwhelm, conquer executive dysfunction, and build bespoke systems tailored to how your ADHD brain actually operates.</strong>
-            </p>
-            <div class="flex flex-wrap gap-4">
-                <a href="https://reevesinnovate.com/book.html" class="bg-orange-500 text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-orange-600 transition shadow-2xl shadow-orange-500/20">Book Your Free Strategy Call</a>
-            </div>
+<div class="main-container">
+    <div class="left-side">
+        <img src="watermarked_img_15336421901899257686.jpg" class="profile-img" alt="Craig Reeves">
+        <h1>ADHD Coaching Discovery Session</h1>
+        <div id='calendar'></div>
+    </div>
+    
+    <div class="right-side">
+        <div class="meeting-meta" style="font-size: 0.9rem; color: var(--text-gray); margin-bottom: 20px;">
+            <p><strong>📍 Location:</strong> Google Meet</p>
+            <p><strong>⏳ Duration:</strong> 30 mins</p>
         </div>
-        
-        <div class="relative group">
-            <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-rose-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-            <div class="relative bg-zinc-900 aspect-[4/5] rounded-2xl border border-zinc-800 overflow-hidden flex flex-col justify-end p-8">
-                <!-- Replace 'coach-profile.jpg' with your photo -->
-                <img src="coach-profile.png" alt="ADHD Coach Profile" class="absolute inset-0 w-full h-full object-cover opacity-60">
-                <div class="relative z-10 glass p-6 rounded-xl border border-white/10">
-                    <div class="text-orange-500 text-xs font-bold uppercase tracking-widest mb-1">Tailored Coaching</div>
-                    <div class="text-xl font-bold text-white">Built for High-Achieving Neurodivergents</div>
-                </div>
-            </div>
-        </div>
-    </header>
+        <div class="slot-title" id="slot-heading" style="font-weight: bold; margin-bottom: 20px;">Select a day to see available times</div>
+        <div id="slot-list" class="slot-list"></div>
+    </div>
+</div>
 
-    <section class="py-24 px-6 bg-zinc-900/30">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">The Playbook</h2>
-                <p class="text-zinc-500">How we turn friction into focus while working with your neurodivergent brain.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="glass p-10 rounded-3xl">
-                    <div class="text-orange-500 text-4xl font-black mb-6">01</div>
-                    <h3 class="text-xl font-bold mb-4 text-white">The Friction Audit</h3>
-                    <p class="text-zinc-400 leading-relaxed">We pinpoint the energy drains, executive dysfunction traps, and administrative friction killing your momentum.</p>
-                </div>
-                <div class="glass p-10 rounded-3xl">
-                    <div class="text-orange-500 text-4xl font-black mb-6">02</div>
-                    <h3 class="text-xl font-bold mb-4 text-white">Dopamine Engineering</h3>
-                    <p class="text-zinc-400 leading-relaxed">We build customized systems, routines, and workflows designed to work with your dopamine cycles, not against them.</p>
-                </div>
-                <div class="glass p-10 rounded-3xl">
-                    <div class="text-orange-500 text-4xl font-black mb-6">03</div>
-                    <h3 class="text-xl font-bold mb-4 text-white">Sustained High Performance</h3>
-                    <p class="text-zinc-400 leading-relaxed">Through targeted accountability and iteration, we turn hyper-focus into a repeatable, sustainable superpower without the burnout.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+<script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweBjZK1rJoEJonjnGejenSifhXTCOVGgVuAzcJMKBAmuhCc0ct1LyqWLDB_PlVV4TG/exec';
 
-    <footer class="py-24 text-center">
-        <p class="text-zinc-500 uppercase tracking-widest text-sm font-bold mb-4">Ready to Master Your Mind?</p>
-        <h2 class="text-4xl font-bold mb-10 max-w-2xl mx-auto">Stop wasting potential on daily chaos. Let's unlock your ADHD superpower.</h2>
-        <a href="https://reevesinnovate.com/book.html" class="inline-block border-2 border-white px-12 py-5 rounded-full font-bold text-lg hover:bg-white hover:text-black transition duration-300">Book A Free Strategy Call</a>
-        <div class="mt-20 text-zinc-600 text-xs">
-            © 2026 REEVES INNOVATE LTD. All Rights Reserved. <br>
-        </div>
-    </footer>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: { left: 'prev', center: 'title', right: 'next' },
+            aspectRatio: 1.35,
+            handleWindowResize: true,
+            selectable: true,
+            dateClick: function(info) {
+                showSlots(info.dateStr);
+            }
+        });
+        calendar.render();
+    });
 
+    function showSlots(date) {
+        const list = document.getElementById('slot-list');
+        const heading = document.getElementById('slot-heading');
+        list.innerHTML = 'Consulting the diary...';
+
+        window.handleBusyData = function(busySlots) {
+            list.innerHTML = '';
+            const formattedDate = new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
+            heading.innerText = "Times for " + formattedDate;
+
+            const times = ["12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00"];
+            
+            times.forEach(t => {
+                const slotTime = new Date(date + 'T' + t + ':00');
+                const isBusy = busySlots.some(busy => {
+                    const bStart = new Date(busy.start);
+                    const bEnd = new Date(busy.end);
+                    return (slotTime >= bStart && slotTime < bEnd);
+                });
+
+                if (!isBusy) {
+                    let b = document.createElement('button');
+                    b.className = 'time-btn';
+                    b.innerText = t;
+                    b.onclick = () => {
+                        document.getElementById('bookingModal').style.display = 'block';
+                        document.getElementById('startTimeInput').value = date + 'T' + t;
+                        document.getElementById('displayTime').innerText = formattedDate + " at " + t;
+                    };
+                    list.appendChild(b);
+                }
+            });
+            document.getElementById('jsonp-script')?.remove();
+        };
+
+        const script = document.createElement('script');
+        script.id = 'jsonp-script';
+        script.src = `${SCRIPT_URL}?callback=handleBusyData`;
+        document.body.appendChild(script);
+    }
+</script>
 </body>
 </html>
