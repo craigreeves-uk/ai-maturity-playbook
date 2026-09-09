@@ -60,7 +60,6 @@
 
         .left-side h1 { font-size: 1.3rem; margin: 10px 0 30px 0; text-align: center; }
         
-        /* THE CRITICAL FIX: Ensure calendar has height */
         #calendar { 
             width: 100%; 
             min-height: 400px; 
@@ -103,7 +102,7 @@
             .main-container { flex-direction: column; min-height: auto; }
             .left-side, .right-side { width: 100%; padding: 25px; }
             .right-side { border-left: none; border-top: 1px solid #eee; }
-            #calendar { min-height: 350px; } /* Adjust height for mobile */
+            #calendar { min-height: 350px; }
         }
     </style>
 </head>
@@ -134,9 +133,7 @@
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
-            initialDate: '2026-02-05', 
             headerToolbar: { left: 'prev', center: 'title', right: 'next' },
-            // aspect ratio helps keep the calendar square/readable
             aspectRatio: 1.35,
             handleWindowResize: true,
             selectable: true,
