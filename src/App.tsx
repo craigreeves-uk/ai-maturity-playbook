@@ -3,6 +3,7 @@ import { DiagnosticForm } from './components/DiagnosticForm';
 import {
   COMMERCIAL_TERMS,
   FAQ_ITEMS,
+  FOUNDER_BIO,
   HERO_CONTENT,
   OFFER_PILLARS,
   PAIN_POINTS,
@@ -71,8 +72,8 @@ export default function App() {
             >
               Admin Calculator
             </a>
-            <a href="#faq" className="text-sm font-medium text-slate-700 hover:text-ink">
-              FAQ
+            <a href="#about" className="text-sm font-medium text-slate-700 hover:text-ink">
+              About
             </a>
             <a
               href="#book-diagnostic"
@@ -123,11 +124,11 @@ export default function App() {
                 Admin Calculator
               </a>
               <a
-                href="#faq"
+                href="#about"
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-1 text-sm font-medium text-slate-700"
               >
-                FAQ
+                About
               </a>
               <a
                 href="#book-diagnostic"
@@ -349,7 +350,42 @@ export default function App() {
           </div>
         </section>
 
-        <section id="faq" className="border-b border-slate-200 bg-white py-16 sm:py-20">
+        <section id="about" className="border-b border-slate-200 bg-white py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
+              <div className="lg:col-span-6">
+                <p className="text-xs font-bold uppercase tracking-wider text-accent">
+                  {FOUNDER_BIO.eyebrow}
+                </p>
+                <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-4xl">
+                  {FOUNDER_BIO.heading}
+                </h2>
+                <p className="mt-2 text-sm font-semibold text-slate-600">{FOUNDER_BIO.role}</p>
+                <div className="mt-5 space-y-4 text-base leading-relaxed text-slate-700">
+                  {FOUNDER_BIO.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-4 lg:col-span-6">
+                {FOUNDER_BIO.credentials.map((credential) => (
+                  <article
+                    key={credential.title}
+                    className="rounded-lg border border-slate-200 bg-surface p-5"
+                  >
+                    <h3 className="text-base font-bold text-ink">{credential.title}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-slate-700">
+                      {credential.detail}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" className="border-b border-slate-200 bg-surface py-16 sm:py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-accent">
@@ -360,7 +396,7 @@ export default function App() {
               </h2>
             </div>
 
-            <div className="mt-10 divide-y divide-slate-200 border-y border-slate-200">
+            <div className="mt-10 divide-y divide-slate-200 border-y border-slate-200 bg-white px-6 rounded-lg">
               {FAQ_ITEMS.map((item) => (
                 <article key={item.question} className="py-6">
                   <h3 className="text-lg font-bold text-ink">{item.question}</h3>
@@ -371,7 +407,7 @@ export default function App() {
           </div>
         </section>
 
-        <section id="book-diagnostic" className="bg-surface py-16 sm:py-24">
+        <section id="book-diagnostic" className="bg-white py-16 sm:py-24">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <p className="text-xs font-bold uppercase tracking-wider text-accent">Start Here</p>
@@ -385,14 +421,14 @@ export default function App() {
               </p>
             </div>
 
-            <div className="mt-10 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
+            <div className="mt-10 rounded-xl border border-slate-200 bg-surface p-6 shadow-sm sm:p-10">
               <DiagnosticForm />
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 bg-white py-10">
+      <footer className="border-t border-slate-200 bg-surface py-10">
         <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 px-4 text-sm text-slate-600 sm:flex-row sm:items-center sm:px-6 lg:px-8">
           <div>
             <p className="font-semibold text-ink">{SITE_META.brandName}</p>
