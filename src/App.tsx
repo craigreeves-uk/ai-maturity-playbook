@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { DiagnosticForm } from './components/DiagnosticForm';
 import {
   COMMERCIAL_TERMS,
+  DELIVERY_PRINCIPLES,
   FAQ_ITEMS,
   FOUNDER_BIO,
   HERO_CONTENT,
   OFFER_PILLARS,
   PAIN_POINTS,
+  PIPELINE_STAGES,
   PROCESS_STEPS,
   SITE_META,
 } from './data/siteContent';
@@ -57,8 +59,8 @@ export default function App() {
           </a>
 
           <nav aria-label="Primary navigation" className="hidden items-center gap-6 md:flex">
-            <a href="#cost-of-inaction" className="text-sm font-medium text-slate-700 hover:text-ink">
-              The Cost
+            <a href="#how-it-works" className="text-sm font-medium text-slate-700 hover:text-ink">
+              How It Works
             </a>
             <a
               href="/automated-operational-reporting"
@@ -103,11 +105,11 @@ export default function App() {
           >
             <div className="flex flex-col gap-3">
               <a
-                href="#cost-of-inaction"
+                href="#how-it-works"
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-1 text-sm font-medium text-slate-700"
               >
-                The Cost
+                How It Works
               </a>
               <a
                 href="/automated-operational-reporting"
@@ -320,16 +322,17 @@ export default function App() {
           </div>
         </section>
 
-        <section id="how-it-works" className="border-b border-slate-200 bg-surface py-16 sm:py-20">
+        {/* Detailed 3 Step Process + Pipeline Diagram + Principles */}
+        <section id="how-it-works" className="border-b border-slate-200 bg-surface py-16 sm:py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="max-w-2xl">
+            <div className="max-w-3xl">
               <p className="text-xs font-bold uppercase tracking-wider text-accent">How It Works</p>
               <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-4xl">
                 Three clear steps from fragmented data to automated operations
               </h2>
               <p className="mt-4 text-base leading-relaxed text-slate-700">
                 Built around busy directors and lean teams. Your staff spend less than three hours
-                total on project calls across the entire month.
+                total on project calls across the entire four week sprint.
               </p>
             </div>
 
@@ -337,15 +340,141 @@ export default function App() {
               {PROCESS_STEPS.map((step) => (
                 <article
                   key={step.stepNumber}
-                  className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm"
+                  className="flex flex-col rounded-lg border border-slate-200 bg-white p-6 shadow-sm"
                 >
-                  <p className="text-xs font-bold uppercase tracking-wider text-accent">
-                    {step.stepNumber}
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs font-bold uppercase tracking-wider text-accent">
+                      {step.stepNumber}
+                    </p>
+                    <span className="rounded bg-orange-50 px-2.5 py-0.5 text-xs font-semibold text-orange-900">
+                      {step.timeframe}
+                    </span>
+                  </div>
+                  <h3 className="mt-3 text-xl font-bold text-ink">{step.title}</h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-slate-700">
+                    {step.description}
                   </p>
-                  <h3 className="mt-2 text-xl font-bold text-ink">{step.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-700">{step.description}</p>
+                  <ul className="mt-5 space-y-2.5 border-t border-slate-100 pt-4 text-xs leading-relaxed text-slate-700">
+                    {step.deliverables.map((deliverable) => (
+                      <li key={deliverable} className="flex items-start gap-2">
+                        <svg
+                          width="15"
+                          height="15"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                          className="mt-0.5 shrink-0 text-accent"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <span>{deliverable}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </article>
               ))}
+            </div>
+
+            {/* Reporting Pipeline Visual */}
+            <figure
+              aria-labelledby="pipeline-heading"
+              className="mt-12 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+            >
+              <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-accent">
+                    Typical Architecture
+                  </p>
+                  <h3 id="pipeline-heading" className="mt-1 text-xl font-bold text-ink">
+                    How a live reporting and AI pipeline moves your data safely
+                  </h3>
+                </div>
+                <p className="text-xs font-medium text-slate-600">
+                  Hosted inside your own UK or EU cloud account
+                </p>
+              </div>
+
+              <div className="mt-6 flex flex-col items-stretch gap-3 lg:flex-row lg:items-center">
+                {PIPELINE_STAGES.map((stage, index) => (
+                  <Fragment key={stage.title}>
+                    <div
+                      className={
+                        stage.highlighted
+                          ? 'flex-1 rounded-lg border-2 border-accent bg-orange-50/40 p-5'
+                          : 'flex-1 rounded-lg border border-slate-200 bg-surface p-5'
+                      }
+                    >
+                      <p className="text-xs font-bold uppercase tracking-wider text-accent">
+                        {stage.stageLabel}
+                      </p>
+                      <h4 className="mt-1 text-base font-bold text-ink">{stage.title}</h4>
+                      <ul className="mt-3 space-y-2 text-xs leading-relaxed text-slate-700">
+                        {stage.items.map((item) => (
+                          <li key={item} className="flex items-start gap-2">
+                            <span
+                              aria-hidden="true"
+                              className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                            />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {index < PIPELINE_STAGES.length - 1 && (
+                      <div
+                        aria-hidden="true"
+                        className="flex items-center justify-center py-1 text-accent lg:px-1"
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          className="rotate-90 lg:rotate-0"
+                        >
+                          <path
+                            d="M5 12h14m0 0l-5-5m5 5l-5 5"
+                            stroke="currentColor"
+                            strokeWidth="2.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                  </Fragment>
+                ))}
+              </div>
+
+              <figcaption className="mt-4 text-xs text-slate-600">
+                Source systems feed cleaned records into your private cloud reporting layer, with
+                manager approval before any automated AI output reaches customers or ledgers.
+              </figcaption>
+            </figure>
+
+            {/* Engineering & Governance Principles */}
+            <div className="mt-12">
+              <h3 className="text-lg font-bold text-ink">
+                Non negotiable engineering principles on every sprint
+              </h3>
+              <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {DELIVERY_PRINCIPLES.map((principle) => (
+                  <article
+                    key={principle.title}
+                    className="rounded-lg border border-slate-200 bg-white p-5"
+                  >
+                    <h4 className="text-sm font-bold text-ink">{principle.title}</h4>
+                    <p className="mt-2 text-xs leading-relaxed text-slate-700">
+                      {principle.description}
+                    </p>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </section>
