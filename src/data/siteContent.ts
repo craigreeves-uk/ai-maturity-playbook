@@ -17,6 +17,11 @@ export interface ProcessStep {
   description: string;
 }
 
+export interface FounderCredential {
+  title: string;
+  detail: string;
+}
+
 export interface FaqItem {
   question: string;
   answer: string;
@@ -25,7 +30,8 @@ export interface FaqItem {
 export const SITE_META = {
   brandName: 'Reeves Innovate Ltd',
   email: 'craig.reeves@reevesinnovate.com',
-  locationNote: 'Registered in England and Wales. Serving UK SMEs.',
+  locationNote:
+    'Company No. 16093590, registered in England and Wales. Based in Nottingham, serving UK SMEs.',
 };
 
 export const HERO_CONTENT = {
@@ -113,6 +119,33 @@ export const PROCESS_STEPS: ProcessStep[] = [
       'In week four, we run a practical training session with your team, switch on the live workflow, and hand over clear operational guides. You keep full control, with 30 days of included post launch support for peace of mind.',
   },
 ];
+
+export const FOUNDER_BIO = {
+  eyebrow: 'About Reeves Innovate Ltd',
+  heading: 'Who you will work with: Craig Reeves',
+  role: 'Founder and Principal Consultant',
+  paragraphs: [
+    'Before incorporating Reeves Innovate Ltd in November 2024, I spent over 10 years in service quality management, customer operations, training, and coaching. Having worked closely with operational queues and frontline teams, I know how quickly clunky handoffs and manual spreadsheets drain morale and margin.',
+    'My work focuses on bridging technical automation and practical everyday operations. Instead of handing your managers complex tools they ignore, every reporting pipeline and AI workflow is built around how your staff actually work, backed by clear training so your team adopts it from day one.',
+  ],
+  credentials: [
+    {
+      title: '10+ years in UK service quality and training',
+      detail:
+        'Proven track record in operational quality management, client retention, and designing practical AI training programmes.',
+    },
+    {
+      title: 'Direct principal delivery',
+      detail:
+        'You work directly with Craig Reeves from initial discovery call through to live handover, never passed off to junior analysts.',
+    },
+    {
+      title: 'UK registered and accountable',
+      detail:
+        'Reeves Innovate Ltd is registered in England and Wales (Company No. 16093590), based in Nottingham and serving UK SMEs.',
+    },
+  ] as FounderCredential[],
+};
 
 export const FAQ_ITEMS: FaqItem[] = [
   {
