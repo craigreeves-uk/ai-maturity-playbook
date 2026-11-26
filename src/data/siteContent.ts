@@ -13,6 +13,20 @@ export interface OfferPillar {
 
 export interface ProcessStep {
   stepNumber: string;
+  timeframe: string;
+  title: string;
+  description: string;
+  deliverables: string[];
+}
+
+export interface PipelineStage {
+  stageLabel: string;
+  title: string;
+  highlighted?: boolean;
+  items: string[];
+}
+
+export interface DeliveryPrinciple {
   title: string;
   description: string;
 }
@@ -102,21 +116,97 @@ export const COMMERCIAL_TERMS = [
 export const PROCESS_STEPS: ProcessStep[] = [
   {
     stepNumber: 'Step 01',
+    timeframe: 'Week 1',
     title: 'Diagnose',
     description:
-      'We start with a focused 20 minute discovery call, followed by a brief read only review of your current tools and spreadsheets. You get a plain English breakdown of where time is leaking, what to automate first, and the exact financial return to expect.',
+      'We start with a focused 20 minute discovery call, followed by a brief read only review of your current tools and spreadsheets before any build begins.',
+    deliverables: [
+      'Shadow one core workflow without interrupting daily operations',
+      'Map every manual CSV export, rekeyed field, and fragile macro',
+      'Agree a plain English scope, fixed fee, and expected payback window',
+    ],
   },
   {
     stepNumber: 'Step 02',
+    timeframe: 'Weeks 2 and 3',
     title: 'Build',
     description:
-      'Over three weeks, I connect your systems, clean the underlying data, and build the automated reporting or AI workflow inside your own UK cloud environment. We test everything against real historical records while your team works normally.',
+      'I engineer the entire reporting pipeline or AI workflow quietly inside your own UK or EU cloud environment while your team works normally.',
+    deliverables: [
+      'Connect finance, CRM, and stock tools using read only API access',
+      'Clean, standardise, and reconcile mismatched records across departments',
+      'Add AI extraction or drafting steps with mandatory human approval gates',
+      'Run parallel shadow tests against historical records to prove figure accuracy',
+    ],
   },
   {
     stepNumber: 'Step 03',
+    timeframe: 'Week 4',
     title: 'Hand Over',
     description:
-      'In week four, we run a practical training session with your team, switch on the live workflow, and hand over clear operational guides. You keep full control, with 30 days of included post launch support for peace of mind.',
+      'We switch on the live workflow alongside your operations and finance leads, hand over full documentation, and verify everything in production.',
+    deliverables: [
+      'Practical training session tailored to the staff using the outputs daily',
+      'Full technical runbooks, data dictionaries, and architecture diagrams',
+      '30 days of included post launch monitoring and adjustments',
+    ],
+  },
+];
+
+export const PIPELINE_STAGES: PipelineStage[] = [
+  {
+    stageLabel: '1. Inputs',
+    title: 'Existing Business Systems',
+    items: [
+      'Finance ledger (Xero or Sage)',
+      'CRM and quoting (HubSpot or Pipedrive)',
+      'Stock and job systems (Cin7, Unleashed, or Excel)',
+      'Supplier PDFs and shared operations inboxes',
+    ],
+  },
+  {
+    stageLabel: '2. Processing Layer',
+    title: 'Clean Pipeline and AI Gateways',
+    highlighted: true,
+    items: [
+      'Automated overnight sync in UK or EU cloud',
+      'Standardised margin, WIP, and stock calculations',
+      'Structured AI document parsing or draft triage',
+      'Mandatory human approval gate before action',
+    ],
+  },
+  {
+    stageLabel: '3. Outputs',
+    title: 'Daily Operational Visibility',
+    items: [
+      'Accurate Monday morning executive margin summary',
+      'Cash, overdue debt, and capacity alerts',
+      'Draft customer quotes ready for manager sign off',
+      'Zero manual CSV exports or copy and paste admin',
+    ],
+  },
+];
+
+export const DELIVERY_PRINCIPLES: DeliveryPrinciple[] = [
+  {
+    title: 'UK or EU cloud only',
+    description:
+      'All data pipelines, databases, and AI calls run inside your own UK or European cloud tenant under UK GDPR. Public AI models are never trained on your records.',
+  },
+  {
+    title: 'Full documentation',
+    description:
+      'Every connector, metric formula, and automated rule ships with plain English runbooks and data maps so your team understands exactly how numbers are built.',
+  },
+  {
+    title: 'Client owns everything',
+    description:
+      'You keep 100% ownership of all code, pipelines, prompts, and reporting models from day one. Zero proprietary lock in and zero ongoing licence traps.',
+  },
+  {
+    title: 'Human approval gates on any AI steps',
+    description:
+      'No AI workflow sends a client quote, posts a finance entry, or changes stock levels unsupervised. Your managers review and approve every critical output.',
   },
 ];
 
