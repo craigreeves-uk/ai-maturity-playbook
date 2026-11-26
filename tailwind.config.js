@@ -6,8 +6,8 @@ export default {
       colors: {
         surface: '#FAFAF8',
         ink: '#0F172A',
-        accent: '#065F46',
-        accentHover: '#064E3B',
+        accent: '#C2410C',
+        accentHover: '#9A3412',
       },
     },
   },
