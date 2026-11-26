@@ -3,6 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (saved === 'dark' || (!saved && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
     <link
       rel="icon"
       type="image/svg+xml"
@@ -15,7 +26,7 @@
     />
     <link rel="canonical" href="https://reevesinnovate.com/leak-calculator" />
   </head>
-  <body class="bg-surface text-ink antialiased selection:bg-orange-100 selection:text-orange-950">
+  <body class="bg-surface text-ink antialiased selection:bg-orange-100 selection:text-orange-950 dark:bg-slate-950 dark:text-slate-100 dark:selection:bg-orange-900 dark:selection:text-orange-100">
     <div id="root"></div>
     <script type="module" src="/src/leakCalculatorEntry.tsx"></script>
   </body>
