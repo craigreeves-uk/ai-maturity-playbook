@@ -22,7 +22,7 @@ export interface FaqItem {
 
 export const SITE_META = {
   brandName: 'Reeves Innovate Ltd',
-  email: 'hello@reevesinnovate.com',
+  email: 'craig.reeves@reevesinnovate.com',
   locationNote: 'Registered in England and Wales. Serving UK SMEs.',
 };
 
