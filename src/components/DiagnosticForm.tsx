@@ -63,11 +63,11 @@ export function DiagnosticForm() {
   if (submitted) {
     return (
       <div role="status" aria-live="polite" className="space-y-6">
-        <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-5">
-          <h3 className="text-lg font-bold text-emerald-950">
+        <div className="rounded-lg border border-orange-200 bg-orange-50 p-5">
+          <h3 className="text-lg font-bold text-orange-950">
             Diagnostic request prepared for {formState.name}
           </h3>
-          <p className="mt-2 text-sm leading-relaxed text-emerald-900">
+          <p className="mt-2 text-sm leading-relaxed text-orange-900">
             Based on your estimate of{' '}
             <span className="font-semibold">{formState.weeklyHours}</span> spent on{' '}
             <span className="font-semibold lowercase">{formState.bottleneck}</span>, your business
