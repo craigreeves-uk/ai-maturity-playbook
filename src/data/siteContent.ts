@@ -7,6 +7,8 @@ export interface PainPoint {
 export interface OfferPillar {
   title: string;
   description: string;
+  href?: string;
+  linkLabel?: string;
 }
 
 export interface ProcessStep {
@@ -28,11 +30,13 @@ export const SITE_META = {
 
 export const HERO_CONTENT = {
   eyebrow: 'UK SME Operations and Data Consultancy',
-  headline: 'Your team is wasting 15 hours a week copying numbers between spreadsheets.',
+  headline: 'Practical AI and Data Operations Consultancy for UK Businesses',
   subheadline:
-    'I build reliable reporting pipelines and practical AI workflows for growing UK businesses. Less manual admin, accurate Monday morning figures, and measurable payback within 60 to 90 days.',
-  primaryCta: 'Book a 20 Minute Diagnostic Call',
-  secondaryCta: 'Take the 2 Minute Readiness Check',
+    'Built for UK Managing Directors and Operations Directors tired of chasing numbers across disconnected spreadsheets. I design automated operational reporting and practical AI workflows that cut repetitive admin and deliver measurable payback within 60 to 90 days.',
+  primaryCta: 'Book an AI Operations Discovery Call',
+  calculatorCta: 'Calculate the annual cost of repetitive admin in your business',
+  roadmapAlt:
+    '90 day AI maturity roadmap showing Diagnose, Build, and Hand Over stages for UK businesses',
   proofPoints: [
     'Fixed project fee agreed upfront',
     'Delivered in four weeks',
@@ -64,9 +68,11 @@ export const PAIN_POINTS: PainPoint[] = [
 
 export const OFFER_PILLARS: OfferPillar[] = [
   {
-    title: 'Automated management reporting',
+    title: 'Automated operational reporting',
     description:
       'We connect your existing finance, sales, and operations systems directly so your weekly cash, margin, and capacity figures land accurately every morning without manual exports.',
+    href: '/automated-operational-reporting',
+    linkLabel: 'Explore automated operational reporting for UK businesses',
   },
   {
     title: 'Practical AI workflow automation',
@@ -81,10 +87,10 @@ export const OFFER_PILLARS: OfferPillar[] = [
 ];
 
 export const COMMERCIAL_TERMS = [
-  'Pricing: Fixed project fee agreed upfront after your diagnostic call, with zero surprise day rates',
+  'Pricing: Fixed project fee agreed upfront after your discovery call, with zero surprise day rates',
   'Timeline: Four weeks from kickoff to full production handover',
   'Ownership: 100% of code, data pipelines, and documentation belong to you',
-  'Risk reversal: If we do not identify measurable savings in staff time or margin during the diagnostic call, I will tell you plainly and decline the project',
+  'Risk reversal: If we do not identify measurable savings in staff time or margin during the discovery call, I will tell you plainly and decline the project',
 ];
 
 export const PROCESS_STEPS: ProcessStep[] = [
@@ -92,7 +98,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     stepNumber: 'Step 01',
     title: 'Diagnose',
     description:
-      'We start with a focused 20 minute diagnostic call, followed by a brief read only review of your current tools and spreadsheets. You get a plain English breakdown of where time is leaking, what to automate first, and the exact financial return to expect.',
+      'We start with a focused 20 minute discovery call, followed by a brief read only review of your current tools and spreadsheets. You get a plain English breakdown of where time is leaking, what to automate first, and the exact financial return to expect.',
   },
   {
     stepNumber: 'Step 02',
@@ -112,7 +118,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'How is a sprint priced, and how do we justify the spend?',
     answer:
-      'Every sprint is delivered for a single fixed fee agreed upfront after your diagnostic call, with 50% due on kickoff and 50% on verified handover. Most UK SME clients recover the investment within 60 to 90 days through reclaimed staff hours, faster quoting, or avoided stock and margin errors. If the numbers do not stack up on our initial call, I will tell you plainly and decline the project.',
+      'Every sprint is delivered for a single fixed fee agreed upfront after your discovery call, with 50% due on kickoff and 50% on verified handover. Most UK SME clients recover the investment within 60 to 90 days through reclaimed staff hours, faster quoting, or avoided stock and margin errors. If the numbers do not stack up on our initial call, I will tell you plainly and decline the project.',
   },
   {
     question: 'Is our commercial and customer data kept secure under UK GDPR?',
