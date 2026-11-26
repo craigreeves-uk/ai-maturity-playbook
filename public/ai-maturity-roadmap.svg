@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 380" fill="none">
+  <rect width="560" height="380" rx="16" fill="#FAFAF8" />
+  <text x="32" y="44" fill="#C2410C" font-family="system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2">90 DAY AI MATURITY ROADMAP</text>
+  <text x="32" y="70" fill="#0F172A" font-family="system-ui, sans-serif" font-size="20" font-weight="700">From spreadsheets to live automation</text>
+
+  <rect x="32" y="96" width="496" height="72" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+  <rect x="48" y="114" width="92" height="24" rx="5" fill="#FFEDD5" />
+  <text x="94" y="130" text-anchor="middle" fill="#9A3412" font-family="system-ui, sans-serif" font-size="11" font-weight="700">DAYS 1 TO 30</text>
+  <text x="156" y="128" fill="#0F172A" font-family="system-ui, sans-serif" font-size="15" font-weight="700">Diagnose Operational Bottlenecks</text>
+  <text x="156" y="150" fill="#475569" font-family="system-ui, sans-serif" font-size="13">Map spreadsheet leaks and verify commercial payback</text>
+
+  <rect x="32" y="184" width="496" height="72" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+  <rect x="48" y="202" width="92" height="24" rx="5" fill="#FFEDD5" />
+  <text x="94" y="218" text-anchor="middle" fill="#9A3412" font-family="system-ui, sans-serif" font-size="11" font-weight="700">DAYS 31 TO 60</text>
+  <text x="156" y="216" fill="#0F172A" font-family="system-ui, sans-serif" font-size="15" font-weight="700">Build Reporting and AI Pipelines</text>
+  <text x="156" y="238" fill="#475569" font-family="system-ui, sans-serif" font-size="13">Connect finance, CRM, and stock inside UK cloud</text>
+
+  <rect x="32" y="272" width="496" height="72" rx="10" fill="#0F172A" />
+  <rect x="48" y="290" width="92" height="24" rx="5" fill="#C2410C" />
+  <text x="94" y="306" text-anchor="middle" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="11" font-weight="700">DAYS 61 TO 90</text>
+  <text x="156" y="304" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="15" font-weight="700">Hand Over and Measure Payback</text>
+  <text x="156" y="326" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="13">Team training, full ownership, and 15+ hours saved weekly</text>
+</svg>
